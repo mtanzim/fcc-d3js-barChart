@@ -13,12 +13,8 @@ function generateBarChart(datasetAll, id) {
 
   const dataset = datasetAll.map(d => d[1]);
   const datasetX = datasetAll.map(d => d[0]);
-
   let datasetXyears = [... new Set(datasetX.map(d => new Date(d).getFullYear()))];
-  // console.log([...new Set(datasetXyears)]);
-  // console.log(datasetXyears);
-
-
+ 
   var axisYoffset = 40;
   var axisXoffset = 0;
   var svgMargin = 25;
@@ -29,18 +25,26 @@ function generateBarChart(datasetAll, id) {
 
 
   // console.log(dataset);
+  d3.select(id)
+    .append("tooltip")
+    .attr("id", "tooltip")
+    .attr("class", "bg-light")
+    .text("tooltip");
+  d3.select(id)
+    .append("h3")
+    .text("US GDP")
+    .attr("id", "title");
+
   var svg = d3.select(id)
     .append("div")
     .classed("svg-container", true) //container class to make it responsive
-    .append("h3")
-    .text("US GDP")
-    .attr("id", "title")
+
     .append("svg")
     //responsive SVG needs these 2 attributes and no width and height attr
     .attr("preserveAspectRatio", "xMinYMin meet")
     .attr("viewBox", `0 0 ${svgWidth + svgMargin} ${svgHeight + svgMargin}`)
     //class to make it responsive
-    .classed("svg-content-responsive", true); 
+    .classed("svg-content-responsive", true);
 
   // var svg = d3.select(id)
   //   .classed("svg-container", true)
@@ -49,6 +53,7 @@ function generateBarChart(datasetAll, id) {
 
   // axes
   var xAxisScale = d3.scaleLinear()
+    // .domain([d3.min(datasetXyears), d3.max(datasetXyears)])
     .domain([d3.min(datasetXyears), d3.max(datasetXyears)])
     .range([0, svgWidth - axisYoffset]);
 
@@ -78,21 +83,42 @@ function generateBarChart(datasetAll, id) {
     .domain([0, d3.max(dataset)])
     .range([0, svgHeight - svgMargin]);
 
+
   svg.selectAll("rect")
-    .data(dataset)
+    .data(datasetAll)
     // takes data from waiting state to 
     .enter()
+
     // below operations get applied to 
     .append("rect")
     .attr("class", "bar")
     .attr("fill", "salmon")
-    .attr("y", d => svgHeight - yScale(d) - axisXoffset)
-    .attr("height", d => yScale(d))
+    .attr("y", d => {
+      return svgHeight - yScale(d[1]) - axisXoffset;
+    })
+    .attr("height", d => {
+      return yScale(d[1]);
+    })
+    .attr('data-gdp', d => d[1])
+    .attr('data-date', d => d[0])
     .attr("width", barWidth - barPadding)
     .attr("transform", (d, i) => {
       var translate = [barWidth * i + axisYoffset + barPadding, 0];
       return `translate(${translate})`;
-    });
+    })
+    // .on ('hover', () => )
+    .on('mouseover', (d, i) => {
+      let tooltip = document.getElementById('tooltip');
+      tooltip.style.display = "block";
+      tooltip.style.left = barWidth * i + axisYoffset + barPadding;
+      tooltip.style.top = svgHeight - svgHeight*0.25;
+
+      tooltip.textContent = `Date: ${d[0]} GDP: ${d[1]}`;
+      tooltip.setAttribute("data-date", d[0]);
+      // tooltip.style.transform = `translate(${axisYoffset + barPadding}, ${svgHeight - axisXoffset})`;
+
+    })
+    .on('mouseout', () => document.getElementById('tooltip').style.display = "none");
 
   /*   svg.selectAll('text')
       .data(dataset)
@@ -109,6 +135,11 @@ function generateBarChart(datasetAll, id) {
 // var datasetJson = require('data.json');
 window.addEventListener('load', function () {
   console.log('All assets are loaded')
+
+  // bootstrap tooptips
+  /*   $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    }) */
   generateBarChart(dataset.data, '#bar-chart');
 
 });

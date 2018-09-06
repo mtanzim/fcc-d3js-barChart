@@ -2,6 +2,17 @@
   padding: 10px;
 }
 
+#bar-chart {
+  position: relative;
+}
+#tooltip {
+  position: absolute;
+}
+
+rect:hover {
+  fill: aqua;
+}
+
 /* .bar-chart {
   margin: 10px;
 } */
