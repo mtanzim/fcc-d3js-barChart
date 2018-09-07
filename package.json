@@ -1,0 +1,23 @@
+{
+  "name": "fcc-d3js-barchart",
+  "version": "1.0.0",
+  "homepage": "https://mtanzim.github.io/fcc-d3js-barChart",
+  "description": "- [Documentation](https://d3js.org/)\r - [Requirements](https://learn.freecodecamp.org/data-visualization/data-visualization-projects/visualize-data-with-a-bar-chart)\r - [Example](https://codepen.io/freeCodeCamp/full/GrZVaM)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtanzim/fcc-d3js-barChart.git"
+  },
+  "author": "Tanzim Mokammel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mtanzim/fcc-d3js-barChart/issues"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.2.0"
+  }
+}
