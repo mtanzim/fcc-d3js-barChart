@@ -106,7 +106,6 @@ function generateBarChart(datasetAll, id) {
       var translate = [barWidth * i + axisYoffset + barPadding, 0];
       return `translate(${translate})`;
     })
-    // .on ('hover', () => )
     .on('mouseover', (d, i) => {
       let tooltip = document.getElementById('tooltip');
       tooltip.style.display = "block";
