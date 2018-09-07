@@ -14,7 +14,7 @@ function generateBarChart(datasetAll, id) {
   const dataset = datasetAll.map(d => d[1]);
   const datasetX = datasetAll.map(d => d[0]);
   let datasetXyears = [... new Set(datasetX.map(d => new Date(d).getFullYear()))];
- 
+
   var axisYoffset = 40;
   var axisXoffset = 0;
   var svgMargin = 25;
@@ -110,7 +110,7 @@ function generateBarChart(datasetAll, id) {
       let tooltip = document.getElementById('tooltip');
       tooltip.style.display = "block";
       tooltip.style.left = barWidth * i + axisYoffset + barPadding;
-      tooltip.style.top = svgHeight - svgHeight*0.25;
+      tooltip.style.top = svgHeight - svgHeight * 0.25;
 
       tooltip.textContent = `Date: ${d[0]} GDP: ${d[1]}`;
       tooltip.setAttribute("data-date", d[0]);
@@ -133,7 +133,8 @@ function generateBarChart(datasetAll, id) {
 // var datasetBarChart = [80, 100, 56, 120, 180, 30, 40, 120, 160];
 // var datasetJson = require('data.json');
 window.addEventListener('load', function () {
-  console.log('All assets are loaded')
+  console.log('All assets are loaded');
+  document.getElementById('tooltip').style.display = "none";
 
   // bootstrap tooptips
   /*   $(function () {
