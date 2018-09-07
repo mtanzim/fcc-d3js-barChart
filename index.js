@@ -29,7 +29,8 @@ function generateBarChart(datasetAll, id) {
     .append("tooltip")
     .attr("id", "tooltip")
     .attr("class", "bg-light")
-    .text("tooltip");
+    // .text("tooltip")
+    // .attr("display", "none");
   d3.select(id)
     .append("h3")
     .text("US GDP")
@@ -134,7 +135,7 @@ function generateBarChart(datasetAll, id) {
 // var datasetJson = require('data.json');
 window.addEventListener('load', function () {
   console.log('All assets are loaded');
-  document.getElementById('tooltip').style.display = "none";
+  // document.getElementById('tooltip').style.display = "none";
 
   // bootstrap tooptips
   /*   $(function () {
