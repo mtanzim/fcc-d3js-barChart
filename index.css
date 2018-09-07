@@ -1,0 +1,28 @@
+.section {
+  padding: 10px;
+}
+
+#bar-chart {
+  position: relative;
+}
+#tooltip {
+  position: absolute;
+}
+
+rect:hover {
+  fill: orange;
+}
+
+/* .bar-chart {
+  margin: 10px;
+} */
+
+/* svg {
+  display: inline-block;
+  margin: auto;
+  text-align: center;
+} */
+
+/* blockquote {
+  padding-left:60px;
+} */
